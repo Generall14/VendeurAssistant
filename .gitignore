@@ -1,0 +1,4 @@
+*.o
+*pugi*
+main
+doc_doxygen/
