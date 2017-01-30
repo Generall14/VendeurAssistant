@@ -1,9 +1,5 @@
 #include <iostream>
-#include "model/Product.hpp"
-#include "model/Item.hpp"
-#include "model/DataLoaderXML.hpp"
-#include "model/Assortment.hpp"
-#include "model/ItemList.hpp"
+#include "controller/MainStateMachine.hpp"
 
 using namespace std;
 
@@ -11,11 +7,8 @@ int main()
 {
 	cout << "Start" << endl;
 
-	Product a("asd", 666, 2.56, Product::weight);
-	Item it(a, 2.33);
-	DataLoaderXML dl("asd");
-	Assortment as(dl);
-	ItemList il();
+	MainStateMachine mst;
+	mst.DoStateMachine();
 
 	cout << "Koniec" << endl;
 	return 0;

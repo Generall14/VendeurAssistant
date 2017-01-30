@@ -6,9 +6,8 @@ OBJECTS  = $(CXXFILES:.cpp=.o)
 INCLUDESDIR = -I"src/"
 OUTPUTFILE = MasterSalesman
 
-src/%.o: src/%.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS)  $< -c -o $@  $(INCLUDESDIR)
-
 
 default: main
 
