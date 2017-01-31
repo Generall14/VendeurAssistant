@@ -18,7 +18,8 @@ public:
 	void AddItem(Item item);
 	void RemoveItem(Item item);
 	int Size() const;
-	void SaveList(ListSaver *saver) const;
+	float TotalPrice() const;
+	void SaveList(ListSaver &saver);
 
 private:
 	std::list<Item> _lista;

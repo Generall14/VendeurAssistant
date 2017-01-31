@@ -4,3 +4,4 @@ main
 doc_doxygen/
 MasterSalesman
 .fuse*
+log/*

@@ -9,7 +9,7 @@ public:
 	ListSaver(){}
 	virtual ~ListSaver(){}
 
-	virtual void SaveList(const ItemList* lista) = 0;
+	virtual void SaveList(ItemList* lista) = 0;
 };
 
 #endif

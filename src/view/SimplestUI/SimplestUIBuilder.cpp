@@ -4,6 +4,11 @@
 #include "../../model/Item.hpp"
 #include "../../model/ItemList.hpp"
 #include "SimplestUIMainMenu.hpp"
+#include "SimplestUICollecting.hpp"
+#include "SimplestUIAdd.hpp"
+#include "SimplestUIQuantity.hpp"
+#include "SimplestUIRemove.hpp"
+#include "SimplestUISearch.hpp"
 
 SimplestUIBuilder::SimplestUIBuilder():
 	StateBuilder()
@@ -21,27 +26,27 @@ State* SimplestUIBuilder::BuildMainMenu()
 	return new SimplestUIMainMenu();
 }
 
-State* SimplestUIBuilder::BuildCollectingState(ItemList&)
+State* SimplestUIBuilder::BuildCollectingState(ItemList& itemList)
 {
-
+	return new SimplestUICollecting(itemList);
 }
 
-State* SimplestUIBuilder::RemoveMenu(ItemList&)
+State* SimplestUIBuilder::BuildRemoveMenu(ItemList& itemList)
 {
-
+	return new SimplestUIRemove(itemList);
 }
 
-State* SimplestUIBuilder::AddMenu(Item&)
+State* SimplestUIBuilder::BuildAddMenu(Item& item)
 {
-
+	return new SimplestUIAdd(item);
 }
 
-State* SimplestUIBuilder::QuantityMenu(Item&)
+State* SimplestUIBuilder::BuildQuantityMenu(Item& item)
 {
-
+	return new SimplestUIQuantity(item);
 }
 
-State* SimplestUIBuilder::SearchMenu(Item&)
+State* SimplestUIBuilder::BuildSearchMenu(Item& item)
 {
-
+	return new SimplestUISearch(item);
 }

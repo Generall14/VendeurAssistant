@@ -3,7 +3,9 @@
 
 #include <stdexcept>
 
-Assortment::Assortment(DataLoader &loader)
+Assortment* Assortment::_instance = 0;
+
+void Assortment::LoadData(DataLoader &loader)
 {
 	loader.LoadData(this);
 }
@@ -29,4 +31,17 @@ Product Assortment::getProduct(int id)
 	{
 		return Product();
 	}
+}
+
+Assortment* Assortment::Instance()
+{
+	if(!_instance)
+		_instance = new Assortment();
+	return _instance;
+}
+
+void Assortment::addProduct(Product pr)
+{
+	if(pr.isValid())
+		_mapa.insert(std::pair<int,Product>(pr.Code(), pr));
 }

@@ -4,6 +4,7 @@
 #include "../model/ListSaver.hpp"
 #include "StateBuilder.hpp"
 #include "../view/SimplestUI/SimplestUIBuilder.hpp"
+#include "../model/ListSaverCSV.hpp"
 
 MainBuilder::MainBuilder(std::string inputDataFile):
 	file(inputDataFile)
@@ -36,6 +37,6 @@ StateBuilder &MainBuilder::BuildStateBuilder()
 void MainBuilder::Init()
 {
 	_stateBuilder = new SimplestUIBuilder();
-	_listSaver = 0;
+	_listSaver = new ListSaverCSV();
 	_dataLoader = new DataLoaderXML(file);
 }

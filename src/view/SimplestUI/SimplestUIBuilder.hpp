@@ -15,11 +15,11 @@ public:
 
 	virtual void InitMenuSystem();
 	virtual State* BuildMainMenu();
-	virtual State* BuildCollectingState(ItemList&);
-	virtual State* RemoveMenu(ItemList&);
-	virtual State* AddMenu(Item&);
-	virtual State* QuantityMenu(Item&);
-	virtual State* SearchMenu(Item&);
+	virtual State* BuildCollectingState(ItemList&itemList);
+	virtual State* BuildRemoveMenu(ItemList&itemList);
+	virtual State* BuildAddMenu(Item& item);
+	virtual State* BuildQuantityMenu(Item& item);
+	virtual State* BuildSearchMenu(Item& item);
 };
 
 #endif

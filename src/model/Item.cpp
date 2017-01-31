@@ -30,3 +30,13 @@ bool Item::operator==(const Item &r)
 		return true;
 	return false;
 }
+
+void Item::setProduct(Product product)
+{
+	_produkt = product;
+}
+
+void Item::setQuantity(float quantity)
+{
+	_ilosc = quantity;
+}

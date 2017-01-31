@@ -12,6 +12,9 @@ public:
 	float Quantity() const;
 	float Price() const;
 
+	void setProduct(Product product);
+	void setQuantity(float quantity);
+
 	bool operator==(const Item &r);
 
 private:

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<MasterSalesmanData>
+	<Item id="1111" desc="Marchew" price="5.55" unit="weight" />
+	<Item id="5234" desc="Jabłko" price="5.10" unit="weight" />
+	<Item id="1257" desc="Kapusta" price="2.22" unit="item" />
+	<Item id="6524" desc="Truskawki" price="50.78" unit="weight" />
+</MasterSalesmanData>
