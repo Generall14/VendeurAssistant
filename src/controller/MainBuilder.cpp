@@ -5,11 +5,11 @@
 #include "StateBuilder.hpp"
 #include "../view/SimplestUI/SimplestUIBuilder.hpp"
 #include "../model/ListSaverCSV.hpp"
+#include "../osrc/Log.hpp"
 
 MainBuilder::MainBuilder(std::string inputDataFile):
 	file(inputDataFile)
 {
-	Init();
 }
 
 MainBuilder::~MainBuilder()
@@ -21,22 +21,39 @@ MainBuilder::~MainBuilder()
 
 DataLoader &MainBuilder::BuildDataLoader()
 {
+	if(!_dataLoader)
+		InitDataLoader();
 	return *_dataLoader;
 }
 
 ListSaver &MainBuilder::BuildListSaver()
 {
+	if(!_listSaver)
+		InitListSaver();
 	return *_listSaver;
 }
 
 StateBuilder &MainBuilder::BuildStateBuilder()
 {
+	if(!_stateBuilder)
+		InitStateBuilder();
 	return *_stateBuilder;
 }
 
-void MainBuilder::Init()
+void MainBuilder::InitDataLoader()
 {
-	_stateBuilder = new SimplestUIBuilder();
-	_listSaver = new ListSaverCSV();
+	Log::I()->S() << "InitDataLoader: DataLoaderXML" << std::endl;
 	_dataLoader = new DataLoaderXML(file);
+}
+
+void MainBuilder::InitListSaver()
+{
+	Log::I()->S() << "InitListSaver: ListSaverCSV" << std::endl;
+	_listSaver = new ListSaverCSV();
+}
+
+void MainBuilder::InitStateBuilder()
+{
+	Log::I()->S() << "InitStateBuilder: SimplestUIBuilder" << std::endl;
+	_stateBuilder = new SimplestUIBuilder();
 }

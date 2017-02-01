@@ -48,6 +48,9 @@ bool Product::operator==(const Product &r)
 	return true;
 }
 
+/**
+ * Sprawdza czy przechowywane parametry mają sens.
+ */
 bool Product::isValid() const
 {
 	if((_cena>=0)&&(_kod>=0))

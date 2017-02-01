@@ -1,3 +1,9 @@
+/**
+ * @class ListSaver
+ * @brief Interfejs zapisywania ItemList.
+ *
+ * Obiekty dziedziczące dany interfejs wykorzystywane są w ItemList do zapisywania danych.
+ */
 #ifndef LISTSAVER_HPP
 #define LISTSAVER_HPP
 

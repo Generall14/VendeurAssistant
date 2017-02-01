@@ -1,3 +1,7 @@
+/**
+ * @class ListSaverCSV
+ * @brief Implementacja interfejsu DataLoader. Zapisuje listę do pliku *.csv.
+ */
 #ifndef LISTSAVERCSV_HPP
 #define LISTSAVERCSV_HPP
 

@@ -19,7 +19,7 @@ void ListSaverCSV::SaveList(ItemList* lista)
 	time(&czas);
 	data = localtime(&czas);
 	char buf[40];
-	sprintf(buf, "%.4i-%.2i-%.2i_%.2i:%.2i:%.2i", data->tm_year+1900, data->tm_mon, data->tm_mday, data->tm_hour, data->tm_min, data->tm_sec);
+	sprintf(buf, "%.4i-%.2i-%.2i_%.2i-%.2i-%.2i", data->tm_year+1900, data->tm_mon, data->tm_mday, data->tm_hour, data->tm_min, data->tm_sec);
 
 	std::string filename(buf);
 	filename.insert(0, _prefix+"_");

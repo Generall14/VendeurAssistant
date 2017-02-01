@@ -1,3 +1,10 @@
+/**
+ * @class ItemList
+ * @brief Lista zakupów.
+ *
+ * Zbiera obiekty Item w jednej liście jako rachunek klienta. Lista może być zapisana (wydrukowana) poprzez wywołanie metody SaveList() z odpowiednim obiektem
+ * z interfejsem ListSaver.
+ */
 #ifndef ITEMLIST_HPP
 #define ITEMLIST_HPP
 

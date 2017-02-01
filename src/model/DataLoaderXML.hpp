@@ -1,3 +1,7 @@
+/**
+ * @class DataLoaderXML
+ * @brief Implementacja interfejsu DataLoader. Wczytuje dane z pliku xml.
+ */
 #ifndef DATALOADERXML_HPP
 #define DATALOADERXML_HPP
 

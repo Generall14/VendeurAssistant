@@ -21,6 +21,11 @@ void SimplestUIBuilder::InitMenuSystem()
 
 }
 
+void SimplestUIBuilder::ClearMenuSystem()
+{
+
+}
+
 State* SimplestUIBuilder::BuildMainMenu()
 {
 	return new SimplestUIMainMenu();

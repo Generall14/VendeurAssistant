@@ -1,3 +1,10 @@
+/**
+ * @class MainBuilder
+ * @brief Główny budowniczy systemu.
+ *
+ * Zwraca wskaźniki do reprezentacji interfejsów DataLoader, ListSaver, StateBuilder. Konfigurowanie programu polega na zwracaniu wybranych implementacji wspomnianych
+ * interfejsów.
+ */
 #ifndef MAINBUILDER_HPP
 #define MAINBUILDER_HPP
 
@@ -23,7 +30,9 @@ protected:
 	ListSaver* _listSaver=0;
 	StateBuilder* _stateBuilder=0;
 
-	virtual void Init();
+	virtual void InitDataLoader();
+	virtual void InitListSaver();
+	virtual void InitStateBuilder();
 };
 
 #endif

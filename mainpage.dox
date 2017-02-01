@@ -1,0 +1,23 @@
+/**
+\mainpage The mainpage documentation
+
+...
+
+Autor: <b>Wojciech Kogut</b> \n
+
+\par Wykorzystanie klasy
+...
+\par Struktura kodu
+Kod został podzielony na trzy części:
+- model - część odpowiadająca za przechowywanie danych,
+- widok - odpowiada za UI programu
+- kontroler - steruje stanem programu oraz zapewnia przepływ danych pomiędzy widokiem i domelem.
+\par Model
+Podstawową klasą modelu jest Product przechowujący podstawowe dane o produktach. Zbiór dostępnych produktów przechowywany jest w obiekcie klasy Assortment, ładowanie danych odbywa się za pomocą obiektów pochodnych klasy DataLoader (w tym przypadku DataLoaderXML). Obiekty klasy Item łączą obiekt Produkt z ilością zakupioną przez klienta. Obiekty zebrane w ItemList stanowią całość zamówienia klienta, podsumowanie ItemList jest zapisywane przez obiekty pochodne po ListSaver (ListSaverCSV).
+\par Kontroler
+Klasą spajającą całośc programu jest MainStateMachine, inicjuje ona pozostałe obiekty oraz zapewnia sterowanie programu za pomocą maszyny stanu. Stany reprezentują poszczególne czynności wykonywane przez użytkownika systemu. W każdym stanie MainStateMachine za pomocą wirtualnej fabryki StateBuilder tworzy odpowiedni podobiekt State (zapewnia interakcję z użytkownikiem) i na podstawie zwróconego rządania wykonuje wybrane przejście.\n\n
+Klasa MainBuilder (lub jej pochodne) tworzy obiekty interfejsów DataLoader, ListSaver oraz StateBuilder.
+\par Widok
+Widoki (ekrany użytkownika) odpowiadają stanom (State) wykonywanym w MainStateMachine. Dla każdego stanu zdefiniowany jest obiekt wyświetlający dany ekran, obiekty te tworzone są za pomocą wybranej reprezentacji interfejsu StateBuilder (które, z kolei tworzone są w MainBuilder). Aktualnie napisane są dwa zestawy widoków (SimplestUIBuilder, NCoursesUIBuilder).
+*/
+

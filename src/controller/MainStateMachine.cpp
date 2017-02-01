@@ -1,8 +1,7 @@
 #include "MainStateMachine.hpp"
 
-#include <iostream>
+#include "../osrc/Log.hpp"
 #include "StateBuilder.hpp"
-#include "State.hpp"
 #include "../model/ItemList.hpp"
 #include "../model/Assortment.hpp"
 #include "../model/Item.hpp"
@@ -19,10 +18,17 @@ MainStateMachine::~MainStateMachine()
 	delete _builder;
 }
 
+State::request MainStateMachine::RunState(State* state)
+{
+	State::request req = state->Run();
+	delete state;
+	return req;
+}
+
 void MainStateMachine::DoStateMachine()
 {
-	std::cout << "Entering main state machine" << std::endl;
-	State* tState=0;
+	Log::I()->S() << "Entering main state machine" << std::endl;
+//	State* tState=0;
 	State::request req;
 
 	ItemList* currItemList=0;
@@ -34,11 +40,8 @@ void MainStateMachine::DoStateMachine()
 		{
 		//===================== Main menu =============================
 		case mainMenuState:
-			std::cout << "MainStateMachine: Main menu" << std::endl;
-			tState = _builder->BuildStateBuilder().BuildMainMenu();
-			req = tState->Run();
-			delete tState;
-			tState = 0;
+			Log::I()->S() << "MainStateMachine: Main menu" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildMainMenu());
 			if(req==State::create)
 			{
 				currItemList = new ItemList();
@@ -49,11 +52,8 @@ void MainStateMachine::DoStateMachine()
 			break;
 		//===================== Collecting ============================
 		case collectingState:
-			std::cout << "MainStateMachine: Budowanie listy" << std::endl;
-			tState = _builder->BuildStateBuilder().BuildCollectingState(*currItemList);
-			req = tState->Run();
-			delete tState;
-			tState = 0;
+			Log::I()->S() << "MainStateMachine: Budowanie listy" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildCollectingState(*currItemList));
 			if(req==State::add)
 				_currentState = addState;
 			if(req==State::remove)
@@ -68,12 +68,9 @@ void MainStateMachine::DoStateMachine()
 			break;
 		//===================== Add item ==============================
 		case addState:
-			std::cout << "MainStateMachine: Dodawanie produktu" << std::endl;
+			Log::I()->S() << "MainStateMachine: Dodawanie produktu" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildAddMenu(tempItem));
 			tempItem.setProduct(Product());
-			tState = _builder->BuildStateBuilder().BuildAddMenu(tempItem);
-			req = tState->Run();
-			delete tState;
-			tState = 0;
 			if(req==State::back)
 				_currentState = collectingState;
 			if(req==State::find)
@@ -83,43 +80,30 @@ void MainStateMachine::DoStateMachine()
 			break;
 		//===================== Set quantity ==========================
 		case quantityState:
-			std::cout << "MainStateMachine: Wprowadzanie ilości" << std::endl;
-			tState = _builder->BuildStateBuilder().BuildQuantityMenu(tempItem);
-			req = tState->Run();
-			delete tState;
-			tState = 0;
+			Log::I()->S() << "MainStateMachine: Wprowadzanie ilości" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildQuantityMenu(tempItem));
 			if(req==State::back)
 				_currentState = addState;
 			if(req==State::cancel)
 				_currentState = collectingState;
 			if(req==State::ok)
 			{
-				std::cout << "==================================================" << std::endl;
-				std::cout << tempItem.Quantity() << std::endl;
-				std::cout << tempItem.ProductItem().isValid() << std::endl;
 				if(tempItem.ProductItem().isValid()&&tempItem.Quantity()>0)
 					currItemList->AddItem(tempItem);
-				std::cout << currItemList->Size() << std::endl;
 				_currentState = collectingState;
 			}
 			break;
 		//===================== Remove elements =======================
 		case removeState:
-			std::cout << "MainStateMachine: Usuwanie pozycji" << std::endl;
-			tState = _builder->BuildStateBuilder().BuildRemoveMenu(*currItemList);
-			req = tState->Run();
-			delete tState;
-			tState = 0;
+			Log::I()->S() << "MainStateMachine: Usuwanie pozycji" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildRemoveMenu(*currItemList));
 			if(req==State::back)
 				_currentState = collectingState;
 			break;
 		//===================== Find product ==========================
 		case findState:
-			std::cout << "MainStateMachine: Wyszukiwanie pozycji" << std::endl;
-			tState = _builder->BuildStateBuilder().BuildSearchMenu(tempItem);
-			req = tState->Run();
-			delete tState;
-			tState = 0;
+			Log::I()->S() << "MainStateMachine: Wyszukiwanie pozycji" << std::endl;
+			req = RunState(_builder->BuildStateBuilder().BuildSearchMenu(tempItem));
 			if(req==State::back)
 				_currentState = addState;
 			if(req==State::ok)
@@ -128,5 +112,7 @@ void MainStateMachine::DoStateMachine()
 		}
 	}
 
-	std::cout << "Leaving main state machine" << std::endl;
+	_builder->BuildStateBuilder().ClearMenuSystem();
+
+	Log::I()->S() << "Leaving main state machine" << std::endl;
 }

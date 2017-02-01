@@ -1,21 +1,22 @@
 /**
- * @class SimplestUIBuilder
- * @brief Budowniczy dla UI typu SimplestUI.
+ * @class NCursesUIBuilder
+ * @brief Budowniczy dla UI typu NCursesUI.
  */
-#ifndef SIMPLESTUIBUILDER_HPP
-#define SIMPLESTUIBUILDER_HPP
+#ifndef NCURSESUIBUILDER_HPP
+#define NCURSESUIBUILDER_HPP
 
 #include "../../controller/StateBuilder.hpp"
+#include <string>
 
 class State;
 class Item;
 class ItemList;
 
-class SimplestUIBuilder : public StateBuilder
+class NCursesUIBuilder : public StateBuilder
 {
 public:
-	SimplestUIBuilder();
-	virtual ~SimplestUIBuilder(){}
+	NCursesUIBuilder();
+	virtual ~NCursesUIBuilder(){}
 
 	virtual void InitMenuSystem();
 	virtual void ClearMenuSystem();
@@ -25,6 +26,8 @@ public:
 	virtual State* BuildAddMenu(Item& item);
 	virtual State* BuildQuantityMenu(Item& item);
 	virtual State* BuildSearchMenu(Item& item);
+
+	static void ShowMsg(std::string msg, std::string opt="");
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include "../osrc/pugixml.hpp"
 #include "Product.hpp"
 #include "Assortment.hpp"
-#include <iostream>
+#include "../osrc/Log.hpp"
 
 DataLoaderXML::DataLoaderXML(std::string adres):
 	_adres(adres)
@@ -16,11 +16,11 @@ void DataLoaderXML::LoadData(Assortment *assortment)
 	pugi::xml_parse_result wynik = dok.load_file(_adres.c_str());
 	if(!wynik)
 	{
-		std::cout << "nie można otworzyć pliku " << _adres << std::endl;
+		Log::I()->S() << "DataLoaderXML: Nie można otworzyć pliku " << _adres << std::endl;
 		return;
 	}
 
-	pugi::xml_node mainNode = dok.child("MasterSalesmanData");
+	pugi::xml_node mainNode = dok.child("VendeurAssistantData");
 	std::string tempDesc, tempUnit;
 	int tempId;
 	float tempPrice;
@@ -41,11 +41,11 @@ void DataLoaderXML::LoadData(Assortment *assortment)
 		if(!tempUnit.compare("weight"))
 			tempPUnit = Product::weight;
 
-		std::cout << "Odczytane dane " << tempDesc << " " << tempId << " " << tempPrice << " " << tempUnit << std::endl;
+		Log::I()->S() << "Odczytane dane " << tempDesc << " " << tempId << " " << tempPrice << " " << tempUnit << std::endl;
 		Product temp(tempDesc, tempId, tempPrice, tempPUnit);
 		if(!temp.isValid())
 		{
-			std::cout << "Nieprawidłowe parametry, odrzucam pozycje" << std::endl;
+			Log::I()->S() << "DataLoaderXML: Nieprawidłowe parametry, odrzucam pozycje" << std::endl;
 			continue;
 		}
 

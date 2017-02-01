@@ -1,3 +1,7 @@
+/**
+ * @class State
+ * @brief Interfejs obiektów stanu.
+ */
 #ifndef STATE_HPP
 #define STATE_HPP
 

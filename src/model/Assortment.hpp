@@ -1,3 +1,10 @@
+/**
+ * @class Assortment
+ * @brief Zbiór produktów.
+ *
+ * Reprezentuje zbiór dostępnych towarów, dzięki dziedziczeniu z wzorca Singleton możliwy jest dostęp do niej z dowolnego miejsca programu. Aby załadować
+ * dane należy wywołać funkcję LoadData(...) z odpowiednim obiektem interfejsu DataLoader.
+ */
 #ifndef ASSORTMENT_HPP
 #define ASSORTMENT_HPP
 

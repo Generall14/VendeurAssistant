@@ -1,3 +1,9 @@
+/**
+ * @class Item
+ * @brief Pojedynczy zakup.
+ *
+ * Reprezentuje pojedynczą pozycję na liście zakupów, zawiera obiekt Product oraz zakupioną ilość. Klasa wykorzystywana w ItemList.
+ */
 #ifndef ITEM_HPP
 #define ITEM_HPP
 

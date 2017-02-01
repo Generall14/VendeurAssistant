@@ -1,3 +1,9 @@
+/**
+ * @class StateBuilder
+ * @brief Interfejs budowania obiektów State.
+ *
+ * Wymusza metody budowania poszczególnych obiektów dla UI. Obiekty dziedziczące dany interfejs wykorzystywane są w MainStateMachine do generowania UI.
+ */
 #ifndef STATEBUILDER_HPP
 #define STATEBUILDER_HPP
 
@@ -12,12 +18,13 @@ public:
 	virtual ~StateBuilder(){}
 
 	virtual void InitMenuSystem() = 0;
-	virtual State* BuildMainMenu() = 0;
-	virtual State* BuildCollectingState(ItemList&) = 0;
-	virtual State* BuildRemoveMenu(ItemList&) = 0;
-	virtual State* BuildAddMenu(Item&) = 0;
-	virtual State* BuildQuantityMenu(Item&) = 0;
-	virtual State* BuildSearchMenu(Item&) = 0;
+	virtual void ClearMenuSystem() = 0;
+	virtual State* BuildMainMenu() = 0;/**<Główne menu*/
+	virtual State* BuildCollectingState(ItemList&) = 0;/**<Tworzenie rachunku*/
+	virtual State* BuildRemoveMenu(ItemList&) = 0;/**<Przeglądanie i usuwanie elementów rachunku*/
+	virtual State* BuildAddMenu(Item&) = 0;/**<Dodawanie nowego zakupu*/
+	virtual State* BuildQuantityMenu(Item&) = 0;/**<Wprowadzanie ilości*/
+	virtual State* BuildSearchMenu(Item&) = 0;/**<Wyszukiwanie produktu*/
 };
 
 #endif

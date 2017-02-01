@@ -1,10 +1,10 @@
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++11 -lncurses
 
 CXXFILES = $(shell find src -type f -name '*.cpp')
 OBJECTS  = $(CXXFILES:.cpp=.o)
 
 INCLUDESDIR = -I"src/"
-OUTPUTFILE = MasterSalesman
+OUTPUTFILE = VendeurAssistant
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS)  $< -c -o $@  $(INCLUDESDIR)
@@ -15,4 +15,4 @@ main: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(OUTPUTFILE)
 
 clean:
-	rm $(OBJECTS) $(OUTPUTFILE)
+	rm $(OBJECTS)

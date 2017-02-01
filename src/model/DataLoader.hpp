@@ -1,3 +1,9 @@
+/**
+ * @class DataLoader
+ * @brief Interfejs wczytywania danych do Assortment.
+ *
+ * Obiekty dziedziczące dany interfejs wykorzystywane są w Assortment do wczytywania danych.
+ */
 #ifndef DATALOADER_HPP
 #define DATALOADER_HPP
 

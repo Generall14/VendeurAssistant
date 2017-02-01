@@ -3,19 +3,20 @@
 #include "osrc/pugixml.hpp"
 #include "model/DataLoaderXML.hpp"
 #include "model/Assortment.hpp"
+#include "controller/MainBuilderNC.hpp"
 
 using namespace std;
 
 int main()
 {
 	Log::I()->S() << "Start" << endl;
-
-	MainStateMachine mst;
+	new MainBuilderNC();
+	MainStateMachine mst(new MainBuilderNC());
 	mst.DoStateMachine();
 
 	//Generowanie wzorca dla plików z danymi:
 //	pugi::xml_document xmldoc;
-//	pugi::xml_node mainNode = xmldoc.append_child("MasterSalesmanData");
+//	pugi::xml_node mainNode = xmldoc.append_child("VendeurAssistantData");
 //	for(int i=0;i<4;++i)
 //	{
 //		pugi::xml_node itemNode = mainNode.append_child("Item");

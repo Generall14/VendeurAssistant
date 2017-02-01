@@ -1,3 +1,10 @@
+/**
+ * @class Product
+ * @brief Podstawowy produkt.
+ *
+ * Reprezentuje poszczególny rodzaj produktu. Przechowuje dane takie jak nazwa produktu, kod produktu, cena oraz jednostka (waga/sztuka). Wykorzystywana w klasach
+ * Assortment oraz Item.
+ */
 #ifndef PRODUCT_HPP
 #define PRODUCT_HPP
 
@@ -6,8 +13,7 @@
 class Product
 {
 public:
-
-	enum unit{weight, item};
+	enum unit{weight, item};												/**<Jednostki produktu*/
 
 	Product(std::string nazwa, int kod, float cena, unit jednostka=item);
 	Product();
