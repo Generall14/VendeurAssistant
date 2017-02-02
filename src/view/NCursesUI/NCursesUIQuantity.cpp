@@ -1,4 +1,4 @@
-#include "NCursesUIAdd.hpp"
+#include "NCursesUIQuantity.hpp"
 
 #include "../../model/Item.hpp"
 #include "../../model/Assortment.hpp"
@@ -8,19 +8,20 @@
 #include <string>
 #include <ncurses.h>
 
-NCursesUIAdd::NCursesUIAdd(Item &item):
+NCursesUIQuantity::NCursesUIQuantity(Item &item):
 	_item(&item)
 {
 
 }
 
-NCursesUIAdd::request NCursesUIAdd::Run()
+NCursesUIQuantity::request NCursesUIQuantity::Run()
 {
 	request temp;
 	initscr();
 	noecho();
-	char inp[6]="\0";
+	char inp[8]="\0";
 	int cp =0;
+	bool fl = _item->ProductItem().Unit()==Product::weight;
 	while(666)
 	{
 		wclear(stdscr);
@@ -30,32 +31,35 @@ NCursesUIAdd::request NCursesUIAdd::Run()
 		refresh();
 		box(stdscr, '|', '-');
 		mvprintw(2, x/2-tempString.size()/2, tempString.c_str());
-		tempString = "Dodawanie produktu";
+		tempString = "Wprowadzanie ilosci";
 		mvprintw(3, x/2-tempString.size()/2, tempString.c_str());
-		tempString = "Wprowadz numer produktu i wcisnij enter";
-		mvprintw(6, x/2-tempString.size()/2, tempString.c_str());
 
-		mvprintw(y-6, 5, "Co dalej?");
-		mvprintw(y-5, 5, "Szukaj [s]");
-		mvprintw(y-4, 5, "Zatwierdz [Enter]");
-		mvprintw(y-3, 5, "Anuluj [Esc]");
+		tempString = "Produkt: " + _item->ProductItem().Name();
+		mvprintw(6, x/2-tempString.size()/2, tempString.c_str());
+		tempString = "Wprowadz ";
+		if(fl)
+			tempString += "wage [g]";
+		else
+			tempString += "ilosc [szt]";
+		tempString += " produktu i wcisnij enter";
+		mvprintw(7, x/2-tempString.size()/2, tempString.c_str());
+
+		mvprintw(y-5, 5, "Co dalej?");
+		mvprintw(y-4, 5, "Zatwierdź [Enter]");
+		mvprintw(y-3, 5, "Cofnij [Esc]");
 		mvprintw(y-2, 5, "?> ");
 		mvprintw(y-2, 8, inp);
 
 		refresh();
 		char ch;
 		ch=getchar();
-		if(ch=='s')
-		{
-			temp = request::find;
-			break;
-		}
+
 		if(ch==27)
 		{
 			temp = request::back;
 			break;
 		}
-		if((ch>47)&&(ch<58)&&(cp<4))
+		if((ch>47)&&(ch<58)&&(cp<6))
 		{
 			inp[cp]=ch;
 			inp[++cp]=0;
@@ -75,15 +79,17 @@ NCursesUIAdd::request NCursesUIAdd::Run()
 				getchar();
 				continue;
 			}
-			Product tProduct = Assortment::Instance()->getProduct(id);
-			if(!tProduct.isValid())
+			if(id<=0)
 			{
-				NCursesUIBuilder::ShowMsg("Produkt o numerze " + std::to_string(id) + " nie istnieje w bazie danych!", "Wcisnij dowolny klawisz aby kontynuowac...");
+				NCursesUIBuilder::ShowMsg("Nieprawidlowa wartosc!", "Wcisnij dowolny klawisz aby kontynuowac...");
 				getchar();
 			}
 			else
 			{
-				_item->setProduct(tProduct);
+				if(fl)
+					_item->setQuantity(((float)id)/1000);
+				else
+					_item->setQuantity(id);
 				temp = request::ok;
 				break;
 			}

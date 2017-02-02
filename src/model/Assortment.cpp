@@ -45,3 +45,8 @@ void Assortment::addProduct(Product pr)
 	if(pr.isValid())
 		_mapa.insert(std::pair<int,Product>(pr.Code(), pr));
 }
+
+int Assortment::Size() const
+{
+	return _mapa.size();
+}

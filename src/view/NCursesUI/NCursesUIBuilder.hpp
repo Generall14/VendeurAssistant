@@ -6,11 +6,12 @@
 #define NCURSESUIBUILDER_HPP
 
 #include "../../controller/StateBuilder.hpp"
+#include "../../model/ItemList.hpp"
+#include "../../model/Assortment.hpp"
 #include <string>
 
 class State;
 class Item;
-class ItemList;
 
 class NCursesUIBuilder : public StateBuilder
 {
@@ -28,6 +29,9 @@ public:
 	virtual State* BuildSearchMenu(Item& item);
 
 	static void ShowMsg(std::string msg, std::string opt="");
+	static void AddHeader(int y);
+	static void AddPosition(int y, ItemList::iIterator it, int c, bool sel=false);
+	static void AddPosition(int y, Assortment::aIterator it, bool sel=false);
 };
 
 #endif

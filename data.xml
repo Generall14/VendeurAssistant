@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <VendeurAssistantData>
 	<Item id="1111" desc="Marchew" price="5.55" unit="weight" />
-	<Item id="5234" desc="Jabłko" price="5.10" unit="weight" />
+	<Item id="5234" desc="Jablko" price="5.10" unit="weight" />
 	<Item id="1257" desc="Kapusta" price="2.22" unit="item" />
 	<Item id="6524" desc="Truskawki" price="50.78" unit="weight" />
+	<Item id="8545" desc="Ziemniaki" price="5.55" unit="weight" />
+	<Item id="6842" desc="Pomidory" price="5.10" unit="weight" />
+	<Item id="8654" desc="Brzoskwinia" price="2.22" unit="item" />
+	<Item id="8745" desc="Gruz" price="50.78" unit="weight" />
 </VendeurAssistantData>

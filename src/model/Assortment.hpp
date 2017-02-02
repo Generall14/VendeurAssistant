@@ -21,6 +21,7 @@ public:
 	void LoadData(DataLoader &loader);
 	Product getProduct(int id);
 	void addProduct(Product pr);
+	int Size() const;
 
 	typedef std::map<int, Product>::iterator aIterator;
 	aIterator begin();

@@ -1,23 +1,39 @@
 /**
 \mainpage The mainpage documentation
 
-...
+Program jest rozwiązaniem zadania kwalifikacyjnego na potrzeby rekrutacji w firmie Teldat. Aplikacja dedykowana jest na systemy Linux.
 
 Autor: <b>Wojciech Kogut</b> \n
+2017-02-02
 
-\par Wykorzystanie klasy
-...
+Plik wykonywalny: exe/VendeurAssistant.
+\note Program nie był dogłębnie testowany.
+
+\par Korzystanie z programu
+Po uruchomieniu programu zostanie wyświetlone menu powitalne, należy wcisnąć 'n' aby rozpocząć tworzenie nowego rachunku\n\n
+W kolejnym menu wyświetlana jest aktualna lista zakupów oraz cena całkowita. Aby dodać pozycję należy wcisnąć 'n'.\n\n
+Wybieranie produktu odbywa się poprzez wpisanie numeru lub poprzez wyszukanie z dostępnej listy ('s' aby przejść do wyszukiwania, tam należy wybrań produkt poprzez wpisanie nazwy i/lub zaznaczenie pozycji przyciskami '2' i '8'). Produkt potwierdza się wciśnięciem klawisza enter.\n\n
+Następnie należy wpisać ilość/wagę produktu i zatwierdzić przyciskiem enter.\n\n
+Listę można edytować wciskając przycisk 'p' w menu rachunku, następnie po wskazaniu odpowiedniego produktu wciskając enter.\n\n
+Po utworzeniu pełnej listy należy w menu rachunku wcisnąć Esc, dane rachunku zostaną zapisane w pliku log/bills/bill_data.csv.\n\n
+Dane produktów przechowywane są w pliku data.xml.
+
+\par Biblioteki
+W programie wykorzystano zewnętrzne biblioteki:
+ - PugiXML (licencja MIT), jako źródła umieszczone w src/osrc/
+ - NCurses (licencja MIT), jako biblioteka linkowana dynamicznie
+
 \par Struktura kodu
 Kod został podzielony na trzy części:
 - model - część odpowiadająca za przechowywanie danych,
 - widok - odpowiada za UI programu
-- kontroler - steruje stanem programu oraz zapewnia przepływ danych pomiędzy widokiem i domelem.
+- kontroler - steruje stanem programu oraz zapewnia przepływ danych pomiędzy widokiem i modelem.
 \par Model
 Podstawową klasą modelu jest Product przechowujący podstawowe dane o produktach. Zbiór dostępnych produktów przechowywany jest w obiekcie klasy Assortment, ładowanie danych odbywa się za pomocą obiektów pochodnych klasy DataLoader (w tym przypadku DataLoaderXML). Obiekty klasy Item łączą obiekt Produkt z ilością zakupioną przez klienta. Obiekty zebrane w ItemList stanowią całość zamówienia klienta, podsumowanie ItemList jest zapisywane przez obiekty pochodne po ListSaver (ListSaverCSV).
 \par Kontroler
-Klasą spajającą całośc programu jest MainStateMachine, inicjuje ona pozostałe obiekty oraz zapewnia sterowanie programu za pomocą maszyny stanu. Stany reprezentują poszczególne czynności wykonywane przez użytkownika systemu. W każdym stanie MainStateMachine za pomocą wirtualnej fabryki StateBuilder tworzy odpowiedni podobiekt State (zapewnia interakcję z użytkownikiem) i na podstawie zwróconego rządania wykonuje wybrane przejście.\n\n
+Klasą spajającą całość programu jest MainStateMachine, inicjuje ona pozostałe obiekty oraz zapewnia sterowanie programu za pomocą maszyny stanu. Stany reprezentują poszczególne czynności wykonywane przez użytkownika systemu. W każdym stanie MainStateMachine za pomocą wirtualnej fabryki StateBuilder tworzy odpowiedni podobiekt State (zapewnia interakcję z użytkownikiem) i na podstawie zwróconego żądania wykonuje wybrane przejście.\n\n
 Klasa MainBuilder (lub jej pochodne) tworzy obiekty interfejsów DataLoader, ListSaver oraz StateBuilder.
 \par Widok
-Widoki (ekrany użytkownika) odpowiadają stanom (State) wykonywanym w MainStateMachine. Dla każdego stanu zdefiniowany jest obiekt wyświetlający dany ekran, obiekty te tworzone są za pomocą wybranej reprezentacji interfejsu StateBuilder (które, z kolei tworzone są w MainBuilder). Aktualnie napisane są dwa zestawy widoków (SimplestUIBuilder, NCoursesUIBuilder).
+Widoki (ekrany użytkownika) odpowiadają stanom (State) wykonywanym w MainStateMachine. Dla każdego stanu zdefiniowany jest obiekt wyświetlający dany ekran, obiekty te tworzone są za pomocą wybranej reprezentacji interfejsu StateBuilder (które, z kolei tworzone są w MainBuilder). Aktualnie napisane są dwa zestawy widoków (SimplestUIBuilder, NCursesUIBuilder).
 */
 

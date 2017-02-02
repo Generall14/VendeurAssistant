@@ -69,8 +69,8 @@ void MainStateMachine::DoStateMachine()
 		//===================== Add item ==============================
 		case addState:
 			Log::I()->S() << "MainStateMachine: Dodawanie produktu" << std::endl;
-			req = RunState(_builder->BuildStateBuilder().BuildAddMenu(tempItem));
 			tempItem.setProduct(Product());
+			req = RunState(_builder->BuildStateBuilder().BuildAddMenu(tempItem));
 			if(req==State::back)
 				_currentState = collectingState;
 			if(req==State::find)

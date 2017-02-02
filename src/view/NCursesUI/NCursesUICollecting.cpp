@@ -1,6 +1,7 @@
 #include "NCursesUICollecting.hpp"
 
 #include "../../model/ItemList.hpp"
+#include "NCursesUIBuilder.hpp"
 #include <iostream>
 #include <ncurses.h>
 
@@ -12,16 +13,7 @@ NCursesUICollecting::NCursesUICollecting(ItemList &itemList):
 
 NCursesUICollecting::request NCursesUICollecting::Run()
 {
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
-	_itemList->AddItem(Item(Product("aaa", 666, 2.22), 6.66));
+	int ii=666;
 	request temp;
 	initscr();
 	while(666)
@@ -37,26 +29,13 @@ NCursesUICollecting::request NCursesUICollecting::Run()
 		mvprintw(3, x/2-tempString.size()/2, tempString.c_str());
 
 		int dst = y-7-4-3-3;
-		mvprintw(5, 3, "Aktualna lista zakupów:");
-		mvprintw(6, 3, "Nr.   Nazwa");
-		mvprintw(6, x-45, "  Kod        Cena        Ilosc    Razem    ");
+		mvprintw(5, 3, "Aktualna lista zakupow:");
+		NCursesUIBuilder::AddHeader(6);
 
 		int c=0;
 		char buf[40];
 		for(auto it=_itemList->begin();it!=_itemList->end()&&c<=dst;++it, ++c)
-		{
-			sprintf(buf, "%i", c+1);
-			mvprintw(7+c, 3, buf);
-			mvprintw(7+c, 9, (*it).ProductItem().Name().c_str());
-			sprintf(buf, "%.4i", (*it).ProductItem().Code());
-			mvprintw(7+c, x-43, buf);
-			sprintf(buf, "%.2f", (*it).ProductItem().Price());
-			mvprintw(7+c, x-32, buf);
-			sprintf(buf, "%.2f", (*it).Quantity());
-			mvprintw(7+c, x-20, buf);
-			sprintf(buf, "%.2f", (*it).Price());
-			mvprintw(7+c, x-11, buf);
-		}
+			NCursesUIBuilder::AddPosition(7+c, it, c+1);
 		if(c<_itemList->Size())
 		{
 			sprintf(buf, "... Lacznie %i pozycji", _itemList->Size());

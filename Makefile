@@ -12,7 +12,7 @@ OUTPUTFILE = VendeurAssistant
 default: main
 
 main: $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(OUTPUTFILE)
+	$(CXX) -o $(OUTPUTFILE) $(CXXFLAGS) $(OBJECTS)
 
 clean:
 	rm $(OBJECTS)
