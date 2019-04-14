@@ -6,4 +6,4 @@ MasterSalesman
 .fuse*
 log/*
 *.tar.gz
-VendeurAssistant
+*VendeurAssistant
