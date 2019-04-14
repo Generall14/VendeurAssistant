@@ -5,3 +5,5 @@ doc_doxygen/
 MasterSalesman
 .fuse*
 log/*
+*.tar.gz
+VendeurAssistant
